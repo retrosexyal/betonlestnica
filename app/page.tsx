@@ -38,6 +38,8 @@ export default function Home() {
         url: site.url,
         telephone: site.phone,
         email: site.email,
+        description:
+          "Проектирование и изготовление бетонных лестниц в Беларуси. Более 16 лет опыта и более 300 изготовленных лестниц.",
         contactPoint: [
           {
             "@type": "ContactPoint",
@@ -121,8 +123,8 @@ export default function Home() {
           </div>
           <div className="hero-visual">
             <Image
-              src="/images/hero.jpg"
-              alt="Монолитная бетонная лестница с выразительной геометрией ступеней"
+              src="/images/photos/photo_2026-09-11_13-45-33.webp"
+              alt="Изготовленная на заказ монолитная винтовая бетонная лестница в частном доме"
               fill
               priority
               sizes="(max-width: 850px) 100vw, 52vw"
@@ -142,27 +144,27 @@ export default function Home() {
         </section>
         <div className="benefit-strip wrap">
           <div>
-            <span>01</span>
+            <span>16+</span>
             <p>
-              От проекта
+              Более 16 лет
               <br />
-              <strong>до реализации</strong>
+              <strong>изготавливаем лестницы</strong>
             </p>
           </div>
           <div>
-            <span>02</span>
+            <span>300+</span>
             <p>
-              Конструкция
+              Более 300 лестниц
               <br />
-              <strong>под ваш проём</strong>
+              <strong>уже изготовлено</strong>
             </p>
           </div>
           <div>
             <span>03</span>
             <p>
-              Дерево, плитка, камень
+              От проекта
               <br />
-              <strong>на выбор</strong>
+              <strong>до реализации</strong>
             </p>
           </div>
           <div>
@@ -216,14 +218,14 @@ export default function Home() {
               <div>
                 <p className="eyebrow">02 / ГЕОМЕТРИЯ В ДЕТАЛЯХ</p>
                 <h2>
-                  Бетон — основа.
+                  Реальные работы.
                   <br />
-                  Характер — ваш.
+                  Разная геометрия.
                 </h2>
               </div>
               <p className="section-intro">
-                Гладкое или зеркальное основание, бетонный косоур или тетива.
-                Разные решения для архитектуры вашего дома.
+                Собрали изготовленные лестницы по типам конструкций. Откройте
+                проект, чтобы рассмотреть детали, варианты отделки и ограждений.
               </p>
             </div>
             <Gallery />
@@ -388,7 +390,7 @@ export default function Home() {
         </section>
       </main>
       <footer className="wrap footer">
-        <a className="brand" href="#" aria-label="Бетонные лестницы — наверх">
+        <a className="brand" href="/" aria-label="Бетонные лестницы — на главную">
           БЕТОННЫЕ ЛЕСТНИЦЫ<span>ПРОЕКТИРОВАНИЕ И ИЗГОТОВЛЕНИЕ</span>
         </a>
         <p>© {new Date().getFullYear()} Бетонные лестницы</p>

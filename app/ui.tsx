@@ -1,7 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { site } from "./site";
+import { works, type WorkImage } from "./works";
 import { sendLeadToTelegram } from "./actions";
 function track(name: string, params: Record<string, string> = {}) {
   window.dispatchEvent(
@@ -23,12 +26,23 @@ export function Tracking() {
   }, []);
   return null;
 }
+
+export function WorkScrollReset() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (!pathname.startsWith("/works/")) return;
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
+
+  return null;
+}
 export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="header">
       <div className="header-inner">
-        <a className="brand" href="#" onClick={() => setOpen(false)}>
+        <a className="brand" href="/" onClick={() => setOpen(false)}>
           БЕТОННЫЕ ЛЕСТНИЦЫ<span>ПРОЕКТИРОВАНИЕ И ИЗГОТОВЛЕНИЕ</span>
         </a>
         <nav
@@ -37,10 +51,10 @@ export function Header() {
           aria-label="Главная навигация"
         >
           {[
-            ["#types", "Конструкции"],
-            ["#projects", "Лестницы"],
-            ["#process", "Этапы"],
-            ["#contacts", "Контакты"],
+            ["/#types", "Конструкции"],
+            ["/#projects", "Наши работы"],
+            ["/#process", "Этапы"],
+            ["/#contacts", "Контакты"],
           ].map(([href, label]) => (
             <a key={href} href={href} onClick={() => setOpen(false)}>
               {label}
@@ -67,57 +81,62 @@ export function Header() {
     </header>
   );
 }
-const photos = [
-  {
-    src: "/images/project-1.jpg",
-    title: "Геометрия поворота",
-    alt: "Бетонная лестница с забежными ступенями",
-    tag: "ЗАБЕЖНЫЕ СТУПЕНИ",
-  },
-  {
-    src: "/images/project-2.jpg",
-    title: "Основа для интерьера",
-    alt: "Монолитная лестница в частном доме",
-    tag: "В ЧАСТНЫЙ ДОМ",
-  },
-  {
-    src: "/images/project-3.jpg",
-    title: "Пластика бетона",
-    alt: "Винтовая бетонная лестница",
-    tag: "ВИНТОВАЯ ФОРМА",
-  },
-];
 export function Gallery() {
+  return (
+    <div className="gallery">
+      {works.map((work, i) => (
+        <Link
+          key={work.slug}
+          className={`project project-${(i % 5) + 1}`}
+          href={`/works/${work.slug}`}
+          aria-label={`${work.title}: посмотреть фотографии и описание`}
+        >
+          <div className="project-image">
+            <Image
+              src={work.cover}
+              alt={work.images[0]?.alt || work.title}
+              fill
+              sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 33vw"
+            />
+            <span className="project-count">{work.images.length} фото</span>
+            <span className="zoom" aria-hidden="true">↗</span>
+          </div>
+          <div className="project-caption">
+            <span>{work.label}</span>
+            <h3>{work.shortTitle}</h3>
+            <p>{work.description}</p>
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+export function WorkPhotoGallery({ images }: { images: WorkImage[] }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [active, setActive] = useState(0);
+  const show = (index: number) => {
+    setActive(index);
+    dialog.current?.showModal();
+  };
   return (
     <>
-      <div className="gallery">
-        {photos.map((p, i) => (
+      <div className="work-photo-grid">
+        {images.map((image, i) => (
           <button
-            key={p.src}
-            className="project"
-            onClick={() => {
-              setActive(i);
-              dialog.current?.showModal();
-            }}
-            aria-label={`Увеличить фото: ${p.alt}`}
+            key={image.src}
+            className="work-photo"
+            onClick={() => show(i)}
+            aria-label={`Увеличить фотографию: ${image.alt}`}
           >
-            <div className="project-image">
-              <Image
-                src={p.src}
-                alt={p.alt}
-                fill
-                sizes="(max-width: 650px) 100vw, 33vw"
-              />
-              <span className="zoom" aria-hidden="true">
-                ↗
-              </span>
-            </div>
-            <div className="project-caption">
-              <span>{p.tag}</span>
-              <h3>{p.title}</h3>
-            </div>
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 33vw"
+            />
+            <span className="work-photo-number">{String(i + 1).padStart(2, "0")}</span>
+            <span className="zoom" aria-hidden="true">↗</span>
           </button>
         ))}
       </div>
@@ -137,25 +156,25 @@ export function Gallery() {
         </button>
         <div className="lightbox-image">
           <Image
-            src={photos[active].src}
-            alt={photos[active].alt}
+            src={images[active].src}
+            alt={images[active].alt}
             fill
             sizes="90vw"
           />
         </div>
-        <p>{photos[active].alt}</p>
+        <p>{images[active].alt}</p>
         <div className="lightbox-controls">
           <button
-            onClick={() => setActive((active + 2) % 3)}
+            onClick={() => setActive((active - 1 + images.length) % images.length)}
             aria-label="Предыдущее фото"
           >
             ←
           </button>
           <span>
-            {active + 1} / {photos.length}
+            {active + 1} / {images.length}
           </span>
           <button
-            onClick={() => setActive((active + 1) % 3)}
+            onClick={() => setActive((active + 1) % images.length)}
             aria-label="Следующее фото"
           >
             →

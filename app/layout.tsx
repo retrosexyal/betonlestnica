@@ -3,9 +3,12 @@ import "./globals.css";
 import { site } from "./site";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: "Бетонные лестницы на заказ в Беларуси — betonlestnica.by",
+  title: {
+    default: "Бетонные лестницы на заказ в Беларуси — betonlestnica.by",
+    template: "%s | betonlestnica.by",
+  },
   description:
-    "Изготовление бетонных лестниц на второй этаж и входного крыльца по всей Беларуси. Проектирование, монолитная конструкция, отделка и ограждения. Запросите расчёт под ваш дом.",
+    "Бетонные лестницы на заказ по всей Беларуси. Более 16 лет опыта и 300 изготовленных лестниц. Проектирование, монолитная конструкция, отделка и ограждения.",
   alternates: { canonical: "/" },
   robots: { index: process.env.SITE_INDEXABLE === "true", follow: true },
   openGraph: {
@@ -14,18 +17,18 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: "Бетонные лестницы под ваш дом — betonlestnica.by",
     description:
-      "От проекта до отделки. Индивидуальное изготовление по всей Беларуси.",
+      "16+ лет опыта, 300+ изготовленных лестниц. От проекта до отделки по всей Беларуси.",
     url: "/",
     images: [
       {
-        url: "/images/hero.jpg",
+        url: "/images/og-betonlestnica.jpg",
         width: 1200,
-        height: 848,
-        alt: "Бетонная лестница на заказ",
+        height: 630,
+        alt: "Бетонные лестницы на заказ — 16 лет опыта, более 300 работ",
       },
     ],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", images: ["/images/og-betonlestnica.jpg"] },
 };
 export const viewport: Viewport = {
   width: "device-width",
