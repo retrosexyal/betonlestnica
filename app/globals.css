@@ -119,19 +119,15 @@ summary:focus-visible {
   gap: 28px;
 }
 .brand {
-  font-size: 1.3rem;
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
-  white-space: nowrap;
+  display: block;
+  width: 285px;
+  flex: 0 1 285px;
   min-width: 0;
 }
-.brand span {
+.brand-logo {
   display: block;
-  font-size: 0.625rem;
-  letter-spacing: 0.12em;
-  font-weight: 500;
-  margin-top: 8px;
+  width: 100%;
+  height: auto;
 }
 .nav {
   display: flex;
@@ -892,7 +888,8 @@ details > p {
   gap: 24px;
 }
 .footer .brand {
-  font-size: 1.1rem;
+  width: 250px;
+  flex-basis: 250px;
 }
 .footer p,
 .footer > a:last-child {
@@ -1183,11 +1180,8 @@ details > p {
     gap: 10px;
   }
   .brand {
-    font-size: 0.95rem;
-  }
-  .brand span {
-    font-size: 0.45rem;
-    letter-spacing: 0.08em;
+    width: 190px;
+    flex-basis: 190px;
   }
   .header-phone {
     font-size: 0.75rem;
@@ -1748,7 +1742,8 @@ details > p {
     display: none;
   }
   .brand {
-    font-size: 0.9rem;
+    width: 205px;
+    flex-basis: 205px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

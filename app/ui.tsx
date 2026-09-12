@@ -43,7 +43,14 @@ export function Header() {
     <header className="header">
       <div className="header-inner">
         <a className="brand" href="/" onClick={() => setOpen(false)}>
-          БЕТОННЫЕ ЛЕСТНИЦЫ<span>ПРОЕКТИРОВАНИЕ И ИЗГОТОВЛЕНИЕ</span>
+          <Image
+            className="brand-logo"
+            src="/images/logo-horizontal.png"
+            alt="Версаль — монолитные бетонные лестницы"
+            width={760}
+            height={180}
+            priority
+          />
         </a>
         <nav
           className={open ? "nav open" : "nav"}

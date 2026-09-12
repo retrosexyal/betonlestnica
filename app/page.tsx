@@ -391,7 +391,13 @@ export default function Home() {
       </main>
       <footer className="wrap footer">
         <a className="brand" href="/" aria-label="Бетонные лестницы — на главную">
-          БЕТОННЫЕ ЛЕСТНИЦЫ<span>ПРОЕКТИРОВАНИЕ И ИЗГОТОВЛЕНИЕ</span>
+          <Image
+            className="brand-logo"
+            src="/images/logo-horizontal.png"
+            alt="Версаль — монолитные бетонные лестницы"
+            width={760}
+            height={180}
+          />
         </a>
         <p>© {new Date().getFullYear()} Бетонные лестницы</p>
         <a href="#estimate">Запросить расчёт ↗</a>
