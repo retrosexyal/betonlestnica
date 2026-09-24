@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { site } from "./site";
+import { CookieConsentProvider } from "./cookie-consent";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Бетонные лестницы на заказ в Беларуси — betonlestnica.by",
-    template: "%s | betonlestnica.by",
+    default: "Бетонные лестницы на заказ в Беларуси — versal-lestnicy.by",
+    template: "%s | versal-lestnicy.by",
   },
   description:
     "Бетонные лестницы на заказ по всей Беларуси. Более 16 лет опыта и 300 изготовленных лестниц. Проектирование, монолитная конструкция, отделка и ограждения.",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ru_BY",
     siteName: site.name,
-    title: "Бетонные лестницы под ваш дом — betonlestnica.by",
+    title: "Бетонные лестницы под ваш дом — versal-lestnicy.by",
     description:
       "16+ лет опыта, 300+ изготовленных лестниц. От проекта до отделки по всей Беларуси.",
     url: "/",
@@ -40,7 +41,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ru">
-      <body>{children}</body>
+      <body>
+        <CookieConsentProvider>{children}</CookieConsentProvider>
+      </body>
     </html>
   );
 }

@@ -97,7 +97,7 @@ export async function sendLeadToTelegram(data: LeadData): Promise<LeadResult> {
         `${escapeHtml(key)}: ${escapeHtml(data.attribution[key].slice(0, 200))}`,
     );
   const message = [
-    "<b>Новая заявка с betonlestnica.by</b>",
+    "<b>Новая заявка с versal-lestnicy.by</b>",
     "",
     `<b>Конструкция:</b> ${escapeHtml(data.kind)}`,
     `<b>Отделка:</b> ${escapeHtml(data.finish)}`,

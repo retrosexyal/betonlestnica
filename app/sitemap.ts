@@ -4,6 +4,7 @@ import { works } from "./works";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${site.url}/`, changeFrequency: "monthly", priority: 1 },
+    { url: `${site.url}/cookie-policy`, changeFrequency: "yearly", priority: 0.2 },
     ...works.map((work) => ({
       url: `${site.url}/works/${work.slug}`,
       changeFrequency: "monthly" as const,

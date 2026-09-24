@@ -6,20 +6,12 @@ import { usePathname } from "next/navigation";
 import { site } from "./site";
 import { works, type WorkImage } from "./works";
 import { sendLeadToTelegram } from "./actions";
-function track(name: string, params: Record<string, string> = {}) {
-  window.dispatchEvent(
-    new CustomEvent("betonlestnica:conversion", {
-      detail: { event: name, ...params },
-    }),
-  );
-  const w = window as Window & { dataLayer?: Record<string, string>[] };
-  w.dataLayer?.push({ event: name, ...params });
-}
+import { trackEvent } from "./analytics";
 export function Tracking() {
   useEffect(() => {
     const click = (e: MouseEvent) => {
       const a = (e.target as Element).closest<HTMLElement>("[data-track]");
-      if (a?.dataset.track) track(a.dataset.track);
+      if (a?.dataset.track) trackEvent(a.dataset.track);
     };
     document.addEventListener("click", click);
     return () => document.removeEventListener("click", click);
@@ -257,7 +249,7 @@ export function LeadForm() {
       if (!result.ok) throw new Error(result.error);
       setFileNames([]);
       setSent(true);
-      track("lead_success");
+      trackEvent("lead_success");
     } catch (err) {
       setError(
         err instanceof Error

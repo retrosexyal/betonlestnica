@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Header, Tracking, WorkPhotoGallery, WorkScrollReset } from "../../ui";
 import { site } from "../../site";
 import { getWork, works } from "../../works";
+import { Footer } from "../../footer";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -125,6 +126,7 @@ export default async function WorkPage({ params }: Props) {
           <span aria-hidden="true">→</span>
         </Link>
       </main>
+      <Footer />
     </>
   );
 }

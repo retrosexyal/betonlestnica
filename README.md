@@ -1,6 +1,6 @@
 # Бетонные лестницы
 
-Лендинг `betonlestnica.by` на Next.js 16, React и TypeScript.
+Лендинг `versal-lestnicy.by` на Next.js 16, React и TypeScript.
 
 ## Запуск
 
@@ -23,7 +23,7 @@ Bot API. Токен бота не попадает в браузер.
 Укажите в `.env.local`:
 
 ```dotenv
-NEXT_PUBLIC_SITE_URL=https://betonlestnica.by
+NEXT_PUBLIC_SITE_URL=https://versal-lestnicy.by
 SITE_INDEXABLE=false
 TELEGRAM_BOT_TOKEN=123456789:your_bot_token
 TELEGRAM_CHAT_ID=123456789
@@ -46,7 +46,7 @@ TELEGRAM_CHAT_ID=123456789
 ## Публикация и SEO
 
 Перед production-сборкой установите `SITE_INDEXABLE=true`. Настройте HTTPS и
-основной домен `https://betonlestnica.by`, затем добавьте `/sitemap.xml` в
+основной домен `https://versal-lestnicy.by`, затем добавьте `/sitemap.xml` в
 Google Search Console и Яндекс Вебмастер.
 
 ## События аналитики

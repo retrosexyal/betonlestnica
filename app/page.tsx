@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { site, faq } from "./site";
 import { Header, Gallery, LeadForm, Tracking } from "./ui";
+import { Footer } from "./footer";
 const variants = [
   [
     "01",
@@ -389,19 +390,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="wrap footer">
-        <a className="brand" href="/" aria-label="Бетонные лестницы — на главную">
-          <Image
-            className="brand-logo"
-            src="/images/logo-horizontal.png"
-            alt="Версаль — монолитные бетонные лестницы"
-            width={760}
-            height={180}
-          />
-        </a>
-        <p>© {new Date().getFullYear()} Бетонные лестницы</p>
-        <a href="#estimate">Запросить расчёт ↗</a>
-      </footer>
+      <Footer />
       <div className="mobile-cta">
         <a href={`tel:${site.phone}`} data-track="phone_click">
           Позвонить
