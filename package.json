@@ -5,6 +5,8 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build --webpack",
+        "deploy:archive:full": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-deploy-full.ps1",
+        "deploy:archive:no-modules": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-deploy-without-node-modules.ps1",
         "start": "next start",
         "typecheck": "tsc --noEmit"
     },
