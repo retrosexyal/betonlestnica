@@ -49,12 +49,6 @@ export default function Home() {
             availableLanguage: "Russian",
             areaServed: "BY",
           },
-          {
-            "@type": "ContactPoint",
-            telephone: site.secondPhone,
-            contactType: "sales",
-            areaServed: "BY",
-          },
         ],
       },
       {
@@ -369,9 +363,6 @@ export default function Home() {
               <div className="contact-details">
                 <a href={`tel:${site.phone}`} data-track="phone_click">
                   {site.phoneDisplay}
-                </a>
-                <a href={`tel:${site.secondPhone}`} data-track="phone_click">
-                  {site.secondPhoneDisplay}
                 </a>
                 <a
                   className="email"

@@ -1,10 +1,8 @@
 export const site = {
   name: "Бетонные лестницы",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://versal-lestnicy.by",
-  phone: "+375293155577",
-  phoneDisplay: "+375 (29) 315-55-77",
-  secondPhone: "+375333155577",
-  secondPhoneDisplay: "+375 (33) 315-55-77",
+  phone: "+375295399906",
+  phoneDisplay: "+375 (29) 539-99-06",
   email: "info@versal-lestnicy.by",
 };
 export const faq = [
