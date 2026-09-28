@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     "Бетонные лестницы на заказ по всей Беларуси. Более 16 лет опыта и 300 изготовленных лестниц. Проектирование, монолитная конструкция, отделка и ограждения.",
   alternates: { canonical: "/" },
-  robots: { index: process.env.SITE_INDEXABLE === "true", follow: true },
+  robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     locale: "ru_BY",
@@ -29,7 +29,10 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: { card: "summary_large_image", images: ["/images/og-betonlestnica.jpg"] },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/og-betonlestnica.jpg"],
+  },
 };
 export const viewport: Viewport = {
   width: "device-width",
