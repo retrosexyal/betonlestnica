@@ -4,9 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      ...(process.env.SITE_INDEXABLE === "true"
-        ? { allow: "/" }
-        : { disallow: "/" }),
+      allow: "/",
     },
     sitemap: `${site.url}/sitemap.xml`,
   };
