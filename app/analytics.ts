@@ -1,8 +1,10 @@
 "use client";
 
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID?.trim() || "";
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() || "";
 const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID?.trim() || "";
 
+const validGtmId = /^GTM-[A-Z0-9]+$/i.test(GTM_ID) ? GTM_ID : "";
 const validGaId = /^G-[A-Z0-9]+$/i.test(GA_ID) ? GA_ID : "";
 const validMetrikaId = /^\d+$/.test(METRIKA_ID) ? Number(METRIKA_ID) : null;
 
@@ -18,6 +20,7 @@ type AnalyticsWindow = Window & {
 };
 
 let analyticsAllowed = false;
+let googleConsentInitialized = false;
 let googleInitialized = false;
 let metrikaInitialized = false;
 
@@ -30,26 +33,67 @@ function loadScript(id: string, src: string) {
   document.head.appendChild(script);
 }
 
-function initializeGoogle() {
-  if (!validGaId || googleInitialized) return;
+function getGoogleWindow() {
   const analyticsWindow = window as unknown as AnalyticsWindow;
-  (analyticsWindow as unknown as Record<string, unknown>)["ga-disable-" + validGaId] = false;
   analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
   analyticsWindow.gtag =
     analyticsWindow.gtag ||
     function gtag(...args: unknown[]) {
       analyticsWindow.dataLayer?.push(args);
     };
-  analyticsWindow.gtag("js", new Date());
-  analyticsWindow.gtag("config", validGaId, {
-    send_page_view: false,
-    allow_google_signals: false,
-    allow_ad_personalization_signals: false,
+  return analyticsWindow;
+}
+
+function initializeGoogleConsent() {
+  const analyticsWindow = getGoogleWindow();
+  if (!googleConsentInitialized) {
+    analyticsWindow.gtag?.("consent", "default", {
+      analytics_storage: "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      wait_for_update: 500,
+    });
+    googleConsentInitialized = true;
+  }
+  return analyticsWindow;
+}
+
+function initializeGoogle() {
+  if ((!validGtmId && !validGaId) || googleInitialized) return;
+  const analyticsWindow = initializeGoogleConsent();
+  if (validGaId) {
+    (analyticsWindow as unknown as Record<string, unknown>)["ga-disable-" + validGaId] = false;
+  }
+  analyticsWindow.gtag?.("consent", "update", {
+    analytics_storage: "granted",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
   });
-  loadScript(
-    "betonlestnica-ga4",
-    `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(validGaId)}`,
-  );
+
+  if (validGtmId) {
+    analyticsWindow.dataLayer?.push({
+      "gtm.start": Date.now(),
+      event: "gtm.js",
+      ...(validGaId ? { ga4_measurement_id: validGaId } : {}),
+    });
+    loadScript(
+      "betonlestnica-gtm",
+      `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(validGtmId)}`,
+    );
+  } else if (validGaId) {
+    analyticsWindow.gtag?.("js", new Date());
+    analyticsWindow.gtag?.("config", validGaId, {
+      send_page_view: false,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false,
+    });
+    loadScript(
+      "betonlestnica-ga4",
+      `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(validGaId)}`,
+    );
+  }
   googleInitialized = true;
 }
 
@@ -84,7 +128,14 @@ export function initializeAnalytics() {
 export function trackPageView(path: string) {
   if (!analyticsAllowed) return;
   const analyticsWindow = window as unknown as AnalyticsWindow;
-  if (validGaId && googleInitialized) {
+  if (validGtmId && googleInitialized) {
+    analyticsWindow.dataLayer?.push({
+      event: "page_view",
+      page_path: path,
+      page_location: window.location.href,
+      page_title: document.title,
+    });
+  } else if (validGaId && googleInitialized) {
     analyticsWindow.gtag?.("event", "page_view", {
       page_path: path,
       page_location: window.location.href,
@@ -106,7 +157,9 @@ export function trackEvent(name: string, params: Record<string, string> = {}) {
   );
   if (!analyticsAllowed) return;
   const analyticsWindow = window as unknown as AnalyticsWindow;
-  if (validGaId && googleInitialized) {
+  if (validGtmId && googleInitialized) {
+    analyticsWindow.dataLayer?.push({ event: name, ...params });
+  } else if (validGaId && googleInitialized) {
     analyticsWindow.gtag?.("event", name, params);
   }
   if (validMetrikaId && metrikaInitialized) {
@@ -146,17 +199,26 @@ function deleteAnalyticsStorage() {
 
 export function revokeAnalyticsConsent() {
   if (typeof window === "undefined") return;
+  const shouldReload = googleInitialized || metrikaInitialized;
   analyticsAllowed = false;
-  const analyticsWindow = window as unknown as AnalyticsWindow;
+  const analyticsWindow = initializeGoogleConsent();
+  analyticsWindow.gtag?.("consent", "update", {
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
   if (validGaId) {
     (analyticsWindow as unknown as Record<string, unknown>)["ga-disable-" + validGaId] = true;
   }
   if (validMetrikaId && metrikaInitialized) {
     analyticsWindow.ym?.(validMetrikaId, "destruct");
   }
+  document.getElementById("betonlestnica-gtm")?.remove();
   document.getElementById("betonlestnica-ga4")?.remove();
   document.getElementById("betonlestnica-metrika")?.remove();
   googleInitialized = false;
   metrikaInitialized = false;
   deleteAnalyticsStorage();
+  if (shouldReload) window.location.reload();
 }

@@ -52,8 +52,8 @@ export default function CookiePolicyPage() {
               </p>
               <h3>Аналитические cookie</h3>
               <p>
-                Только после вашего согласия сайт может подключить Google
-                Analytics 4 и Яндекс Метрику. Эти сервисы помогают оценивать
+                Только после вашего согласия сайт может подключить Google Tag
+                Manager с Google Analytics 4 и Яндекс Метрику. Эти сервисы помогают оценивать
                 посещаемость, источники переходов, просмотренные страницы,
                 техническую информацию о визитах и то, как используется сайт.
                 Состав обрабатываемых данных зависит от настроек и работы
@@ -62,9 +62,10 @@ export default function CookiePolicyPage() {
             </section>
 
             <section>
-              <h2><span>03</span> Google Analytics</h2>
+              <h2><span>03</span> Google Tag Manager и Google Analytics</h2>
               <p>
-                После согласия Google Analytics 4 может сохранять cookie и
+                После согласия Google Tag Manager загружает настроенные в нём
+                аналитические теги. Google Analytics 4 может сохранять cookie и
                 использовать браузерные идентификаторы для различения визитов и
                 подготовки статистики. Идентификатор ресурса в этой политике не
                 публикуется. Подробнее об использовании данных Google можно
@@ -130,7 +131,7 @@ export default function CookiePolicyPage() {
               </p>
             </section>
 
-            <p className="policy-updated">Дата последнего обновления: 12 сентября 2026 г.</p>
+            <p className="policy-updated">Дата последнего обновления: 29 сентября 2026 г.</p>
           </article>
         </div>
       </main>

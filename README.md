@@ -51,7 +51,26 @@ Google Search Console и Яндекс Вебмастер.
 
 ## События аналитики
 
-События передаются в существующий `window.dataLayer` и DOM-событие
+Скрипты аналитики загружаются только после согласия пользователя. Предпочтительная
+схема — Google Tag Manager, внутри которого настроен Google Analytics 4. Укажите:
+
+```dotenv
+NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+При загрузке контейнера Measurement ID доступен в `dataLayer` как
+`ga4_measurement_id`. В GTM создайте переменную типа Data Layer Variable с этим
+именем, Google tag с этой переменной и триггером Initialization — All Pages.
+Для события `page_view` создайте GA4 Event tag с одноимённым Custom Event
+триггером. Аналогично настройте нужные конверсионные события из таблицы ниже.
+Автоматическую отправку page view в Google tag отключите, чтобы не было дублей.
+
+Если `NEXT_PUBLIC_GTM_ID` не задан, используется прямое подключение GA4 по
+`NEXT_PUBLIC_GA_MEASUREMENT_ID`. После изменения публичных переменных проект
+нужно пересобрать.
+
+События передаются в `window.dataLayer` и DOM-событие
 `betonlestnica:conversion`:
 
 | Событие | Действие |
