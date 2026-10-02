@@ -24,7 +24,6 @@ Bot API. Токен бота не попадает в браузер.
 
 ```dotenv
 NEXT_PUBLIC_SITE_URL=https://versal-lestnicy.by
-SITE_INDEXABLE=false
 TELEGRAM_BOT_TOKEN=123456789:your_bot_token
 TELEGRAM_CHAT_ID=123456789
 ```
@@ -65,6 +64,43 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 Для события `page_view` создайте GA4 Event tag с одноимённым Custom Event
 триггером. Аналогично настройте нужные конверсионные события из таблицы ниже.
 Автоматическую отправку page view в Google tag отключите, чтобы не было дублей.
+Также отключите автоматические просмотры при изменении истории браузера в
+Enhanced Measurement потока GA4: переходы между страницами сайт передаёт сам.
+
+### Проверка контейнера versal-lestnicy.by
+
+Идентификаторы по скриншотам: `GTM-TFFZJ8S2` и `G-ESZXWJCNCJ`.
+В коде команды Google передаются через `dataLayer.push(arguments)`;
+контейнер загружается только после согласия на аналитические cookie.
+Отдельный `gtag.js` при включённом GTM не загружается.
+
+В рабочей области GTM проверьте следующие настройки:
+
+| Тег | Настройка | Триггер |
+| --- | --- | --- |
+| GA4 — Google Tag | Tag ID `G-ESZXWJCNCJ` либо переменная `ga4_measurement_id`; параметр `send_page_view` = boolean `false` | Initialization — All Pages |
+| GA4 Event — page_view | Event name `page_view`; параметры `page_location`, `page_title`, `page_path` из одноимённых Data Layer Variables | Custom Event `page_view` |
+| GA4 Event — phone_click | Event name `phone_click`; тот же Measurement ID | Custom Event `phone_click` |
+| GA4 Event — email_click | Event name `email_click`; тот же Measurement ID | Custom Event `email_click` |
+| GA4 Event — lead_success | Event name `lead_success`; тот же Measurement ID | Custom Event `lead_success` |
+
+Текущий триггер Click — Phone (`Click URL` начинается с `tel:`) подходит
+для ссылок сайта. Если переходите на Custom Event `phone_click`, замените им
+триггер в существующем теге, не оставляйте оба способа активными одновременно.
+На предоставленных скриншотах видны только Google Tag и phone_click;
+настройки внутри тегов и опубликованная версия не показаны.
+Надпись «Изменения в раб. обл.: 4» требует проверки публикации: изменения
+рабочей области сами по себе не становятся активными на сайте.
+
+В Preview / Tag Assistant примите аналитические cookie: Google Tag должен
+сработать один раз, `analytics_storage` перейти в `granted`, а `page_view`
+отправиться один раз для текущей страницы. Перейдите в карточку работы и
+обратно: по одному `page_view` на каждый переход. Нажмите телефон: один
+`phone_click`. При отказе от аналитики контейнер не должен загружаться.
+После проверки нажмите «Отправить» → «Опубликовать» и проверьте события
+в GA4 Realtime / DebugView. `lead_success` проверяйте после действительно
+успешной отправки формы. Публичные переменные включаются в клиентский код
+во время сборки: для сервера нужна новая production-сборка.
 
 Если `NEXT_PUBLIC_GTM_ID` не задан, используется прямое подключение GA4 по
 `NEXT_PUBLIC_GA_MEASUREMENT_ID`. После изменения публичных переменных проект

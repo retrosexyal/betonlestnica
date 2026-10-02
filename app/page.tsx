@@ -86,8 +86,7 @@ export default function Home() {
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
             <div className="eyebrow">
-              <span className="mini-line" /> ПРОЕКТИРУЕМ И ИЗГОТАВЛИВАЕМ ·
-              БЕЛАРУСЬ
+              <span className="mini-line" /> ПРОЕКТИРУЕМ И ИЗГОТАВЛИВАЕМ
             </div>
             <h1 id="hero-title">
               Бетонные
@@ -97,6 +96,7 @@ export default function Home() {
               <span>Под ваш дом.</span>
             </h1>
             <p className="hero-description">
+              <strong className="hero-location">Работаем по всей Беларуси.</strong>
               От первого эскиза до готовых ступеней.
               <br className="desktop-break" /> На второй этаж и для входного
               крыльца —<br className="desktop-break" /> с отделкой или без неё.

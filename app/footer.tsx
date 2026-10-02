@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { CookieSettingsButton } from "./cookie-consent";
 
 export function Footer() {
   return (
@@ -19,7 +18,6 @@ export function Footer() {
       <p>© {new Date().getFullYear()} Бетонные лестницы</p>
       <nav className="footer-links" aria-label="Правовая информация">
         <Link href="/cookie-policy">Политика cookie</Link>
-        <CookieSettingsButton />
       </nav>
     </footer>
   );

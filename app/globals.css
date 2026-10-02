@@ -139,9 +139,13 @@ summary:focus-visible {
   color: #5c7527;
 }
 .header-phone {
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 1.125rem;
+  font-weight: 700;
   white-space: nowrap;
+  flex-shrink: 0;
+}
+.header-phone:hover {
+  color: #5c7527;
 }
 .menu-button {
   display: none;
@@ -189,6 +193,12 @@ h1 span {
   color: #d1d6d0;
   font-size: 1.0625rem;
   line-height: 1.7;
+}
+.hero-location {
+  display: block;
+  color: var(--lime);
+  font-size: 1.1875rem;
+  margin-bottom: 8px;
 }
 .hero-actions {
   display: flex;
@@ -988,7 +998,7 @@ details > p {
     gap: 18px;
   }
   .header-phone {
-    font-size: 0.8125rem;
+    font-size: 1rem;
   }
   .hero-copy {
     padding: 48px 30px 40px 32px;
@@ -1043,7 +1053,7 @@ details > p {
   }
   .header-phone {
     margin-left: auto;
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
   .menu-button {
     display: block;
@@ -1184,7 +1194,7 @@ details > p {
     flex-basis: 190px;
   }
   .header-phone {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
   }
   .menu-button {
     font-size: 1.25rem;
@@ -1739,11 +1749,11 @@ details > p {
     width: calc(100% - 24px);
   }
   .header-phone {
-    display: none;
+    font-size: 0.8125rem;
   }
   .brand {
-    width: 205px;
-    flex-basis: 205px;
+    width: 125px;
+    flex-basis: 125px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1807,8 +1817,7 @@ details > p {
   border-radius: var(--radius);
   box-shadow: 0 20px 55px #111b1638;
 }
-.cookie-banner h2,
-.cookie-dialog h2 {
+.cookie-banner h2 {
   font-size: 1.35rem;
   letter-spacing: -0.025em;
 }
@@ -1831,8 +1840,7 @@ details > p {
   align-content: center;
   gap: 8px;
 }
-.cookie-banner .button,
-.cookie-dialog .button {
+.cookie-banner .button {
   min-width: 118px;
   min-height: 44px;
   padding: 11px 16px;
@@ -1842,96 +1850,6 @@ details > p {
   border: 1px solid #7c8780;
   color: #fff;
   background: transparent;
-}
-.cookie-configure {
-  grid-column: 1 / -1;
-  border: 0;
-  padding: 6px;
-  color: #d5dcd2;
-  background: transparent;
-  font-size: 0.8125rem;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-.cookie-dialog {
-  width: min(620px, calc(100% - 32px));
-  max-height: calc(100dvh - 32px);
-  padding: 0;
-  border: 0;
-  border-radius: var(--radius);
-  color: var(--ink);
-  background: var(--paper);
-  box-shadow: 0 24px 80px #111b165c;
-}
-.cookie-dialog::backdrop {
-  background: #111b16a8;
-}
-.cookie-dialog-card {
-  padding: 30px;
-}
-.cookie-dialog-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 24px;
-  padding-bottom: 24px;
-}
-.cookie-dialog-head .eyebrow {
-  margin-bottom: 9px;
-  color: var(--muted);
-  font-size: 0.625rem;
-}
-.cookie-dialog-close {
-  display: grid;
-  flex: 0 0 42px;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  color: var(--ink);
-  background: transparent;
-}
-.cookie-category {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 24px;
-  padding: 22px 0;
-  border-top: 1px solid var(--line);
-}
-.cookie-category h3 {
-  font-size: 1rem;
-}
-.cookie-category p {
-  max-width: 440px;
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 0.8125rem;
-  line-height: 1.6;
-}
-.cookie-always-on {
-  color: #4f6622;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-.cookie-category-toggle {
-  cursor: pointer;
-}
-.cookie-category-toggle input {
-  width: 24px;
-  height: 24px;
-  accent-color: #688a26;
-}
-.cookie-dialog-actions {
-  display: flex;
-  gap: 10px;
-  padding-top: 8px;
-}
-.cookie-dialog .cookie-reject {
-  color: var(--ink);
-  border-color: var(--ink);
 }
 .footer-links {
   display: flex;
@@ -2014,10 +1932,6 @@ details > p {
   background: #e4e8e1;
   font-size: 0.9em;
 }
-.policy-cookie-button {
-  margin-top: 22px;
-  border: 0;
-}
 .policy-updated {
   padding-top: 28px;
   border-top: 1px solid #cfd5cc;
@@ -2046,21 +1960,6 @@ details > p {
     gap: 18px;
     width: calc(100% - 24px);
     padding: 20px;
-  }
-  .cookie-dialog-card {
-    padding: 22px 18px;
-  }
-  .cookie-category {
-    gap: 12px;
-  }
-  .cookie-always-on {
-    max-width: 75px;
-    text-align: right;
-    white-space: normal;
-  }
-  .cookie-dialog-actions {
-    align-items: stretch;
-    flex-direction: column;
   }
   .policy-page {
     padding: 48px 0 80px;

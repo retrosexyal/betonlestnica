@@ -38,8 +38,9 @@ function getGoogleWindow() {
   analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
   analyticsWindow.gtag =
     analyticsWindow.gtag ||
-    function gtag(...args: unknown[]) {
-      analyticsWindow.dataLayer?.push(args);
+    function gtag() {
+      // Google commands use an Arguments object, as in the official snippet.
+      analyticsWindow.dataLayer?.push(arguments);
     };
   return analyticsWindow;
 }
