@@ -15,7 +15,12 @@ export function Footer() {
           height={180}
         />
       </Link>
-      <p>© {new Date().getFullYear()} Бетонные лестницы</p>
+      <p>© {new Date().getFullYear()} Версаль — бетонные лестницы</p>
+      <nav className="footer-services" aria-label="Услуги и цены">
+        <Link href="/stoimost-betonnyh-lestnic">Стоимость</Link>
+        <Link href="/proektirovanie-betonnyh-lestnic">Проектирование</Link>
+        <Link href="/#projects">Конструкции и фото</Link>
+      </nav>
       <nav className="footer-links" aria-label="Правовая информация">
         <Link href="/cookie-policy">Политика cookie</Link>
       </nav>

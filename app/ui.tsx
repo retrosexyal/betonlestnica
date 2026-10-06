@@ -52,7 +52,8 @@ export function Header() {
           {[
             ["/#types", "Конструкции"],
             ["/#projects", "Наши работы"],
-            ["/#process", "Этапы"],
+            ["/stoimost-betonnyh-lestnic", "Цены"],
+            ["/proektirovanie-betonnyh-lestnic", "Проектирование"],
             ["/#contacts", "Контакты"],
           ].map(([href, label]) => (
             <a key={href} href={href} onClick={() => setOpen(false)}>
@@ -142,6 +143,7 @@ export function WorkPhotoGallery({ images }: { images: WorkImage[] }) {
       <dialog
         ref={dialog}
         className="lightbox"
+        aria-label="Просмотр фотографий лестницы"
         onClick={(e) => {
           if (e.target === e.currentTarget) dialog.current?.close();
         }}
@@ -399,7 +401,7 @@ export function LeadForm() {
         </span>
       </label>
       <p className="privacy-note">
-        Получатель — «Бетонные лестницы». По вопросам использования данных:{" "}
+        Получатель — «Версаль — бетонные лестницы». По вопросам использования данных:{" "}
         <a href={`mailto:${site.email}`}>{site.email}</a>.
       </p>
       <button className="button lime submit" type="submit" disabled={busy}>

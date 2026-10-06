@@ -1,4 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
+import { PriceCards, PriceNote } from "./content-ui";
+import { priceExamples } from "./pricing";
 import { site, faq } from "./site";
 import { Header, Gallery, LeadForm, Tracking } from "./ui";
 import { Footer } from "./footer";
@@ -8,24 +11,28 @@ const variants = [
     "Прямая",
     "Лаконичный марш для помещений с достаточной длиной проёма.",
     "Один марш",
+    "/works/pryamye-betonnye-lestnitsy",
   ],
   [
     "02",
     "Г-образная",
     "Поворот на 90° с площадкой или забежными ступенями.",
     "Поворот 90°",
+    "/works/g-obraznye-betonnye-lestnitsy",
   ],
   [
     "03",
     "П-образная",
     "Два марша с разворотом для продуманного использования пространства.",
     "Поворот 180°",
+    "/works/p-obraznye-betonnye-lestnitsy",
   ],
   [
     "04",
     "Винтовая",
     "Выразительная форма для индивидуальных планировок.",
     "Плавная геометрия",
+    "/works/vintovye-betonnye-lestnitsy",
   ],
 ];
 export default function Home() {
@@ -187,7 +194,7 @@ export default function Home() {
             </p>
           </div>
           <div className="types-grid">
-            {variants.map(([n, title, text, tag]) => (
+            {variants.map(([n, title, text, tag, href]) => (
               <article className="type-card" key={n}>
                 <div className="type-top">
                   <span>{n}</span>
@@ -195,16 +202,16 @@ export default function Home() {
                 </div>
                 <h3>{title}</h3>
                 <p>{text}</p>
-                <a href="#estimate" className="card-link">
-                  Обсудить вариант <span aria-hidden="true">↗</span>
-                </a>
+                <Link href={href} className="card-link">
+                  Подробнее и фото <span aria-hidden="true">↗</span>
+                </Link>
               </article>
             ))}
           </div>
           <div className="type-note">
             <strong>Не знаете, что подойдёт?</strong>
             <span>Начнём с плана или фотографии проёма.</span>
-            <a href="#estimate">Помогите выбрать ↗</a>
+            <Link href="/proektirovanie-betonnyh-lestnic">О проектировании ↗</Link>
           </div>
         </section>
         <section id="projects" className="section projects">
@@ -226,6 +233,24 @@ export default function Home() {
             <Gallery />
           </div>
         </section>
+        <section id="prices" className="section wrap home-prices">
+          <div className="section-heading">
+            <div><p className="eyebrow">СТОИМОСТЬ / ПОД КЛЮЧ БЕЗ ОТДЕЛКИ</p><h2>Реальные формы.<br />Понятные ориентиры.</h2></div>
+            <p className="section-intro">Материалы, доставка и работы по бетонной конструкции включены. Выберите пример — рассчитаем решение под ваш дом.</p>
+          </div>
+          <PriceCards examples={[priceExamples[0], priceExamples[1], priceExamples[3]]} />
+          <PriceNote />
+          <div className="home-price-actions"><Link className="button dark" href="/stoimost-betonnyh-lestnic">Все 8 вариантов и цены <span aria-hidden="true">↗</span></Link><Link className="text-link" href="/#estimate">Рассчитать мою лестницу →</Link></div>
+        </section>
+        <section className="section home-services"><div className="wrap">
+          <div className="section-heading"><div><p className="eyebrow">ПЕРЕД ЗАКАЗОМ</p><h2>Разберёмся в деталях.</h2></div><p className="section-intro">От выбора проёма до стоимости монолита. Собрали информацию, с которой проще планировать лестницу.</p></div>
+          <div className="service-link-grid">
+            <Link className="service-link" href="/proektirovanie-betonnyh-lestnic"><h3>Проектирование <span aria-hidden="true">↗</span></h3><p>Форма, чистовые уровни, опирание и подготовка под отделку.</p></Link>
+            <Link className="service-link" href="/stoimost-betonnyh-lestnic"><h3>Стоимость лестницы <span aria-hidden="true">↗</span></h3><p>Восемь вариантов от 5 000 BYN с фотографиями и комплектацией.</p></Link>
+            <Link className="service-link" href="/works/lestnitsy-s-obratnymi-stupenyami"><h3>Обратные ступени <span aria-hidden="true">↗</span></h3><p>Зеркальный профиль монолитной лестницы и варианты исполнения.</p></Link>
+            <Link className="service-link" href="/works/betonnye-lestnitsy-na-tetivakh"><h3>Лестницы на тетивах <span aria-hidden="true">↗</span></h3><p>Радиусные боковые балки и открытые бетонные ступени.</p></Link>
+          </div>
+        </div></section>
         <section id="finish" className="section wrap finish">
           <div>
             <p className="eyebrow">03 / ОТДЕЛКА И ОГРАЖДЕНИЯ</p>

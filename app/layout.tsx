@@ -5,18 +5,18 @@ import { CookieConsentProvider } from "./cookie-consent";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Бетонные лестницы на заказ в Беларуси — versal-lestnicy.by",
-    template: "%s | versal-lestnicy.by",
+    default: "Бетонные лестницы в Беларуси от 5 000 BYN | Версаль",
+    template: "%s | Версаль",
   },
   description:
-    "Бетонные лестницы на заказ по всей Беларуси. Более 16 лет опыта и 300 изготовленных лестниц. Проектирование, монолитная конструкция, отделка и ограждения.",
+    "Бетонные лестницы на заказ по всей Беларуси от 5 000 BYN без отделки. Материалы, доставка и работы включены. 16+ лет опыта, проектирование, отделка и ограждения.",
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     locale: "ru_BY",
     siteName: site.name,
-    title: "Бетонные лестницы под ваш дом — versal-lestnicy.by",
+    title: "Бетонные лестницы под ваш дом — Версаль",
     description:
       "16+ лет опыта, 300+ изготовленных лестниц. От проекта до отделки по всей Беларуси.",
     url: "/",
