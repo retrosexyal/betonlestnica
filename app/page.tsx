@@ -5,6 +5,7 @@ import { priceExamples } from "./pricing";
 import { site, faq } from "./site";
 import { Header, Gallery, LeadForm, Tracking } from "./ui";
 import { Footer } from "./footer";
+import { UsefulArticles } from "./article-ui";
 const variants = [
   [
     "01",
@@ -374,6 +375,7 @@ export default function Home() {
             ))}
           </div>
         </section>
+        <UsefulArticles />
         <section id="contacts" className="contact-section">
           <div className="wrap">
             <p className="eyebrow">ОБСУДИМ ВАШ ПРОЕКТ</p>

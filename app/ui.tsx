@@ -54,6 +54,7 @@ export function Header() {
             ["/#projects", "Наши работы"],
             ["/stoimost-betonnyh-lestnic", "Цены"],
             ["/proektirovanie-betonnyh-lestnic", "Проектирование"],
+            ["/poleznoe", "Полезное"],
             ["/#contacts", "Контакты"],
           ].map(([href, label]) => (
             <a key={href} href={href} onClick={() => setOpen(false)}>

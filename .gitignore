@@ -6,3 +6,8 @@ node_modules/
 /output/deploy-standalone-*.zip
 output/
 output*
+
+# Local audits, reports, screenshots and generated Next.js declarations
+/tmp/
+/gtm-published.jpg
+/next-env.d.ts

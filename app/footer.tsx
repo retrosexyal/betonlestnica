@@ -20,6 +20,7 @@ export function Footer() {
         <Link href="/stoimost-betonnyh-lestnic">Стоимость</Link>
         <Link href="/proektirovanie-betonnyh-lestnic">Проектирование</Link>
         <Link href="/#projects">Конструкции и фото</Link>
+        <Link href="/poleznoe">Полезное</Link>
       </nav>
       <nav className="footer-links" aria-label="Правовая информация">
         <Link href="/cookie-policy">Политика cookie</Link>
